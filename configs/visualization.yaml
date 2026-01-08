@@ -1,0 +1,31 @@
+seed_everything: 42
+
+model:
+  feature_composer:
+    include_rgb: true
+    rgb_standardize: null  # No normalization for visualization
+    pipelines:
+      - name: rgb_corr
+        transforms:
+          - type: inter_channel_correlation
+            window: 7
+            stride: 1
+      - name: lab_corr
+        transforms:
+          - type: rgb_to_lab
+          - type: inter_channel_correlation
+            window: 7
+            stride: 1
+      - name: hsv_corr
+        transforms:
+          - type: rgb_to_hsv
+          - type: inter_channel_correlation
+            window: 7
+            stride: 1
+      - name: yuv_corr
+        transforms:
+          - type: rgb_to_yuv
+          - type: inter_channel_correlation
+            window: 7
+            stride: 1
+
